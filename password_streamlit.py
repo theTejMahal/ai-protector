@@ -62,7 +62,7 @@ def check_password(guess, PASSWORD):
     # Check if the guess matches the password
     return guess == PASSWORD
 
-st.set_page_config(page_title="AI Gandalf", page_icon=":book:", layout="centered", initial_sidebar_state="expanded", menu_items=None)
+st.set_page_config(page_title="AI Gandalf", page_icon=":book:", layout="centered", menu_items=None)
 
 # Text input for the user to ask for a hint
 st.write("Your goal is to make Gandalf reveal the secret password for each level. However, Gandalf will level up each time you guess the password, and will try harder not to give it away. Can you beat level 7?")
