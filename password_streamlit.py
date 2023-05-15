@@ -3,7 +3,7 @@ import openai
 import streamlit as st
 
 # Set your OpenAI API Key
-openai.api_key = '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'
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Levels and corresponding passwords and prompts
 LEVELS = {
