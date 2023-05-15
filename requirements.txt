@@ -212,7 +212,6 @@ threadpoolctl==3.1.0
 tiktoken==0.2.0
 tokenizers==0.13.2
 toml==0.10.2
-tomli==2.0.1
 tomlkit==0.11.7
 toolz==0.11.2
 torchvision==0.12.0
