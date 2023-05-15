@@ -76,7 +76,7 @@ hint_prompt = st.text_input('Send message to Gandalf')
 # Check if the user has typed a question and pressed the button
 if hint_prompt:
     hint = check_trick(check_giveaway(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level),PASSWORD),PASSWORD,hint_prompt,level)
-    st.write(level,hint)
+    st.write(hint)
 
 # Text input for the user to guess the password
 password_guess = st.text_input('Guess the password', key='password')
