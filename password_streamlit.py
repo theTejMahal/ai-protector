@@ -1,6 +1,7 @@
 # Import required libraries
 import openai
 import streamlit as st
+import time
 
 # Set your OpenAI API Key
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -83,7 +84,9 @@ st.image("https://www.giantbomb.com/a/uploads/original/13/135472/2228639-guardia
 st.write("Your goal is to make the Martingale AI reveal the secret password for each level. However, Martingale will level up each time you guess the password, and will try harder not to give it away. Can you beat level 7?")
 
 # Level selection
-level = st.selectbox('Choose a level', list(LEVELS.keys()), format_func=lambda x: f'Level {x}')
+#level = st.selectbox('Choose a level', list(LEVELS.keys()), format_func=lambda x: f'Level {x}')
+level = 1
+st.metric(label="Level", value=level)
 PASSWORD = LEVELS[level]["password"]
 SYSPROMPT = LEVELS[level]["sysprompt"]
 
@@ -104,5 +107,7 @@ password_guess = st.text_input('Guess the password', key='password')
 if password_guess:
     if check_password(password_guess, PASSWORD):
         st.success('Congratulations! You guessed the password correctly.')
+        time.sleep(5)
+        level = level + 1
     else:
         st.error('Sorry, that\'s not correct. Try again.')
