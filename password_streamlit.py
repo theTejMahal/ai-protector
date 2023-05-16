@@ -43,7 +43,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
 def check_giveaway(output_text, PASSWORD):
     if level > 2:
         # Check if PASSWORD is being given away
-        if PASSWORD in output_text:
+        if PASSWORD in output_text.upper():
             return("Oops, I almost gave away the password!")
             # output_text = output_text.replace(PASSWORD, "DOLPHIN" )
     return output_text
@@ -84,11 +84,10 @@ hint_prompt = st.text_input('Send message to Martingale AI')
 
 # Check if the user has typed a question and pressed the button
 if hint_prompt:
-    hint = check_trick(
-        check_giveaway(
-        get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level)
-        ,PASSWORD),
-        PASSWORD,hint_prompt,level)
+    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level),
+        PASSWORD,hint_prompt,level),
+        PASSWORD)
+        
     st.write(hint)
 
 # Text input for the user to guess the password
