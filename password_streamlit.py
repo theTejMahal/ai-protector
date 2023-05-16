@@ -120,8 +120,13 @@ with st.form("password_submit",clear_on_submit=True):
         # Check if the user has made a guess and pressed the button
         if check_password(password_guess, PASSWORD):
             st.success('Congratulations! You guessed the password correctly.')
-            time.sleep(2)
-            st.session_state.level = st.session_state.level + 1
+            if st.session_state.level == 7:
+                st.success('...and won the game!')
+                time.sleep(2)
+                st.session_state.level = 1
+            else:
+                time.sleep(2)
+                st.session_state.level = st.session_state.level + 1
             st.experimental_rerun()
         else:
             st.error('Sorry, that\'s not correct. Try again.')
