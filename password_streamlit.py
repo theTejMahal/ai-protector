@@ -24,7 +24,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
     if level > 5:
         for blacklist_word in BLACKLIST_WORDS:
             if blacklist_word in prompt.upper():
-                return("Stop trying to trick me!")
+                return "Stop trying to trick me!"
                 # prompt = prompt.replace(blacklist_word,"Dolphin")
     else:
         st.write(prompt)
