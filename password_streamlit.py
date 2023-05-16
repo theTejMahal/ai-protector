@@ -122,7 +122,7 @@ st.metric(label="Level", value=st.session_state.level)
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
-with st.form("send_message",clear_on_submit=True):
+with st.form("send_message",clear_on_submit=False):
     hint_prompt = st.text_input('Send message to Martingale AI')
     submitted_hint = st.form_submit_button("Submit")
     # Check if the user has typed a question and pressed the button
