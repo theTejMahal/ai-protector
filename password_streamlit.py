@@ -20,7 +20,7 @@ BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITU
                    "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM","HINT","CLUE","GUESS","PLAY","SCENE","SKIT","LETTER"}
 
 def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
-    st.write(prompt)
+    st.write("get_hint",prompt)
     if level > 5:
         for blacklist_word in BLACKLIST_WORDS:
             if blacklist_word in prompt.upper():
@@ -40,15 +40,8 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
         st.write(hint_response)
         return hint_response
 
-def check_giveaway(output_text, PASSWORD):
-    if level > 2:
-        # Check if PASSWORD is being given away
-        if PASSWORD in output_text.upper():
-            return("Oops, I almost gave away the password!")
-            # output_text = output_text.replace(PASSWORD, "DOLPHIN" )
-    return output_text
-
 def check_trick(output_text, PASSWORD, prompt, level):
+    st.write("check_trick",output_text)
     if level > 3:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -64,6 +57,14 @@ def check_trick(output_text, PASSWORD, prompt, level):
             return output_text
     return output_text
 
+def check_giveaway(output_text, PASSWORD):
+    st.write("check_giveaway",output_text)
+    if level > 2:
+        # Check if PASSWORD is being given away
+        if PASSWORD in output_text.upper():
+            return("Oops, I almost gave away the password!")
+            # output_text = output_text.replace(PASSWORD, "DOLPHIN" )
+    return output_text
 
 def check_password(guess, PASSWORD):
     # Check if the guess matches the password
