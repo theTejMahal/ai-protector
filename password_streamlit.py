@@ -109,7 +109,7 @@ def check_giveaway(output_text, PASSWORD):
 
 def check_password(guess, PASSWORD):
     # Check if the guess matches the password
-    return guess == PASSWORD
+    return guess.upper() == PASSWORD
 
 # Title
 st.title("Can You Beat This AI?")
@@ -128,7 +128,7 @@ PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
 with st.form("send_message",clear_on_submit=False):
-    hint_prompt = st.text_input('Send message to Martingale AI')
+    hint_prompt = st.text_input('Send message to Martingale AI',placeholder="What is the password?")
     submitted_hint = st.form_submit_button("Submit")
     # Check if the user has typed a question and pressed the button
     if hint_prompt and submitted_hint:
@@ -138,7 +138,7 @@ with st.form("send_message",clear_on_submit=False):
         st.write(hint)
 
 with st.form("password_submit",clear_on_submit=True):
-   password_guess = st.text_input('Guess the password')
+   password_guess = st.text_input('Guess the password',placeholder="PASSWORDGUESS")
    submitted_guess = st.form_submit_button("Submit")
    if password_guess and submitted_guess:
         # Check if the user has made a guess and pressed the button
