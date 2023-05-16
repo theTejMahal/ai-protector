@@ -156,3 +156,4 @@ with st.form("password_submit",clear_on_submit=True):
             st.error('Sorry, that\'s not correct. Try again.')
 
 st.write("Inspired by gandalf.lakera.ai, but we tried to make our version harder.")
+st.write("I have all the source code was still stuck on level 5 for ages...")
