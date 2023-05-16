@@ -77,7 +77,7 @@ def check_password(guess, PASSWORD):
 # Title
 st.title("Beat the AI")
 
-st.image("sunrise.jpg", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+st.image("https://www.giantbomb.com/a/uploads/original/13/135472/2228639-guardians_of_middle_earthcharacter_artgandalf.jpg", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 # Text input for the user to ask for a hint
 st.write("Your goal is to make the Martingale AI reveal the secret password for each level. However, Martingale will level up each time you guess the password, and will try harder not to give it away. Can you beat level 7?")
