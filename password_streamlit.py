@@ -2,6 +2,7 @@
 import openai
 import streamlit as st
 import time
+from difflib import SequenceMatcher
 
 # Set your OpenAI API Key
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -35,6 +36,7 @@ LEVELS = {
 LEVEL_CHECK_GIVEAWAY = 3
 LEVEL_CHECK_TRICK = 4
 LEVEL_CHECK_BLACKLIST = 6
+LEVEL_CHECK_SIMILARITY = 7
 
 BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITUDE",
                    "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM",
@@ -45,11 +47,18 @@ if 'level' not in st.session_state:
     st.session_state['level'] = 1
 
 # Functions
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
 def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT):
     if st.session_state.level >= LEVEL_CHECK_BLACKLIST:
         if check_blacklist(prompt):
             return "Stop trying to trick me!"
             #prompt = prompt.replace(blacklist_word,"Dolphin")
+    if st.session_state.level >= LEVEL_CHECK_SIMILARITY:
+        for blacklist_word in BLACKLIST_WORDS:
+            if blacklist_word in prompt.upper():
+                prompt = prompt.replace(blacklist_word,"Dolphin")
     # Call to the OpenAI API
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
