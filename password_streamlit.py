@@ -22,7 +22,7 @@ BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITU
 def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
     if level > 5:
         for blacklist_word in BLACKLIST_WORDS:
-            if blacklist_word in prompt:
+            if blacklist_word in prompt.upper():
                 prompt = prompt.replace(blacklist_word,"Dolphin")
     # Call to the OpenAI API
     response = openai.ChatCompletion.create(
