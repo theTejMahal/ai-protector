@@ -21,6 +21,11 @@ BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITU
                    "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM",
                    "HINT","CLUE","GUESS","PLAY","SCENE","SKIT","LETTER","TL;DR","TLDR"}
 
+# Initialize level
+if 'level' not in st.session_state:
+    st.session_state['level'] = 1
+
+# Functions
 def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
     if level > 5:
         if check_blacklist(prompt):
@@ -62,7 +67,7 @@ def check_trick(output_text, PASSWORD, prompt, level):
     return output_text
 
 def check_giveaway(output_text, PASSWORD):
-    if level > 2:
+    if st.session_state.key.level > 2:
         # Check if PASSWORD is being given away
         if PASSWORD in output_text.upper():
             if level < 5:
@@ -85,8 +90,6 @@ st.write("Your goal is to make the Martingale AI reveal the secret password for 
 
 # Level selection
 #level = st.selectbox('Choose a level', list(LEVELS.keys()), format_func=lambda x: f'Level {x}')
-if 'level' not in st.session_state:
-    st.session_state['level'] = 1
 st.metric(label="Level", value=st.session_state.key.level)
 PASSWORD = LEVELS[st.session_state.key.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.key.level]["sysprompt"]
