@@ -115,7 +115,7 @@ with st.form("send_message",clear_on_submit=True):
 
 with st.form("password_submit",clear_on_submit=True):
    password_guess = st.text_input('Guess the password')
-   submitted_guess = st.form_submit_button("Submit",clear_on_submit=True)
+   submitted_guess = st.form_submit_button("Submit")
    if password_guess and submitted_guess:
         # Check if the user has made a guess and pressed the button
         if check_password(password_guess, PASSWORD):
