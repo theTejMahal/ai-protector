@@ -85,17 +85,18 @@ st.write("Your goal is to make the Martingale AI reveal the secret password for 
 
 # Level selection
 #level = st.selectbox('Choose a level', list(LEVELS.keys()), format_func=lambda x: f'Level {x}')
-level = 1
-st.metric(label="Level", value=level)
-PASSWORD = LEVELS[level]["password"]
-SYSPROMPT = LEVELS[level]["sysprompt"]
+if 'level' not in st.session_state:
+    st.session_state['level'] = 1
+st.metric(label="Level", value=st.session_state.key.level)
+PASSWORD = LEVELS[st.session_state.key.level]["password"]
+SYSPROMPT = LEVELS[st.session_state.key.level]["sysprompt"]
 
 hint_prompt = st.text_input('Send message to Martingale AI')
 
 # Check if the user has typed a question and pressed the button
 if hint_prompt:
-    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level),
-        PASSWORD,hint_prompt,level),
+    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, st.session_state.key.level),
+        PASSWORD,hint_prompt,st.session_state.key.level),
         PASSWORD)
         
     st.write(hint)
@@ -108,6 +109,7 @@ if password_guess:
     if check_password(password_guess, PASSWORD):
         st.success('Congratulations! You guessed the password correctly.')
         time.sleep(5)
-        level = level + 1
+        st.session_state.key.level = st.session_state.key.level + 1
+        st.experimental_rerun()
     else:
         st.error('Sorry, that\'s not correct. Try again.')
