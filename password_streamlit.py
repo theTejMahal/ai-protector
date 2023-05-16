@@ -26,6 +26,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
                 return("Stop trying to trick me!")
                 # prompt = prompt.replace(blacklist_word,"Dolphin")
     else:
+        st.write(prompt)
         # Call to the OpenAI API
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
