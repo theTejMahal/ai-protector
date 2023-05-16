@@ -40,7 +40,7 @@ LEVEL_CHECK_SIMILARITY = 7
 SIMILARITY_THRESHOLD = 0.8
 
 BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITUDE",
-                   "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM",
+                   "PASSWORD","PASSPHRASE","PASS","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM",
                    "HINT","CLUE","GUESS","PLAY","SCENE","SKIT","LETTER","TL;DR","TLDR"}
 
 # Initialize level
@@ -79,7 +79,7 @@ def check_blacklist(prompt, BLACKLIST_WORDS=BLACKLIST_WORDS):
             return True
     return False  
 
-# TODO check edit distance from blacklist, python library to check whether strings are close, or check spoofing
+# TODO embeddings for this? but then people could do p@ss and word maybe, maybe not. - check edit distance from blacklist, python library to check whether strings are close, or check spoofing
 
 def check_trick(output_text, PASSWORD, prompt):
     if st.session_state.level >= LEVEL_CHECK_TRICK:
