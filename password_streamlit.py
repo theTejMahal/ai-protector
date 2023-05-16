@@ -59,7 +59,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT):
     if st.session_state.level >= LEVEL_CHECK_SIMILARITY:
         st.write("SIMILAR WORDS!!!")
         for blacklist_word in BLACKLIST_WORDS:
-            for prompt_word in prompt.upper():
+            for prompt_word in prompt.upper().split():
                 st.write(blacklist_word,prompt_word,similar(blacklist_word,prompt_word))
                 if similar(blacklist_word,prompt_word) > SIMILARITY_THRESHOLD:
                     st.write("SIMILAR WORDS!!!")
