@@ -20,6 +20,7 @@ BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITU
                    "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM","HINT","CLUE","GUESS","PLAY","SCENE","SKIT","LETTER"}
 
 def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
+    st.write(prompt)
     if level > 5:
         for blacklist_word in BLACKLIST_WORDS:
             if blacklist_word in prompt.upper():
