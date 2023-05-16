@@ -37,6 +37,7 @@ LEVEL_CHECK_GIVEAWAY = 3
 LEVEL_CHECK_TRICK = 4
 LEVEL_CHECK_BLACKLIST = 6
 LEVEL_CHECK_SIMILARITY = 7
+SIMILARITY_THRESHOLD = 0.8
 
 BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITUDE",
                    "PASSWORD","SECRET","CODE","POEM","ACROSTIC","SYNONYM","ANTONYM",
@@ -57,7 +58,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT):
             #prompt = prompt.replace(blacklist_word,"Dolphin")
     if st.session_state.level >= LEVEL_CHECK_SIMILARITY:
         for blacklist_word in BLACKLIST_WORDS:
-            if blacklist_word in prompt.upper():
+            if similar(blacklist_word,prompt.upper()) > SIMILARITY_THRESHOLD:
                 prompt = prompt.replace(blacklist_word,"Dolphin")
     # Call to the OpenAI API
     response = openai.ChatCompletion.create(
