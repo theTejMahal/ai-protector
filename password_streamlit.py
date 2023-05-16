@@ -118,7 +118,7 @@ st.write("Your goal is to make the Martingale AI reveal the secret password for 
 
 # Level selection
 st.metric(label="Level", value=st.session_state.level)
-LEVEL_DESCRIPTION = LEVELS[st.session_state.level]["password"]
+LEVEL_DESCRIPTION = LEVELS[st.session_state.level]["detail"]
 st.write(LEVEL_DESCRIPTION)
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
