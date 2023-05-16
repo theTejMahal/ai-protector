@@ -59,7 +59,8 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT):
     if st.session_state.level >= LEVEL_CHECK_SIMILARITY:
         for blacklist_word in BLACKLIST_WORDS:
             if similar(blacklist_word,prompt.upper()) > SIMILARITY_THRESHOLD:
-                prompt = prompt.replace(blacklist_word,"Dolphin")
+                return "Stop trying to trick me!"
+                #prompt = prompt.replace(blacklist_word,"Dolphin")
     # Call to the OpenAI API
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
