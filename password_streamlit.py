@@ -94,32 +94,25 @@ st.metric(label="Level", value=st.session_state.level)
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
-hint_prompt = st.text_input('Send message to Martingale AI')
-
-# Check if the user has typed a question and pressed the button
-if hint_prompt:
-    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT),
-        PASSWORD,hint_prompt),
-        PASSWORD)
-        
-    st.write(hint)
-
-# Text input for the user to guess the password
-password_guess = st.text_input('Guess the password', key='password')
+with st.form("send_message"):
+    hint_prompt = st.text_input('Send message to Martingale AI')
+    submitted_hint = st.form_submit_button("Submit")
+    # Check if the user has typed a question and pressed the button
+    if hint_prompt and submitted_hint:
+        hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT),
+            PASSWORD,hint_prompt),
+            PASSWORD)
+        st.write(hint)
 
 with st.form("password_submit"):
-   st.write("Inside the form")
    password_guess = st.text_input('Guess the password')
-
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Submit")
-   if submitted:
+   submitted_guess = st.form_submit_button("Submit")
+   if password_guess and submitted_guess:
         # Check if the user has made a guess and pressed the button
-        if password_guess:
-            if check_password(password_guess, PASSWORD):
-                st.success('Congratulations! You guessed the password correctly.')
-                time.sleep(5)
-                st.session_state.level = st.session_state.level + 1
-                st.experimental_rerun()
-            else:
-                st.error('Sorry, that\'s not correct. Try again.')
+        if check_password(password_guess, PASSWORD):
+            st.success('Congratulations! You guessed the password correctly.')
+            time.sleep(2)
+            st.session_state.level = st.session_state.level + 1
+            st.experimental_rerun()
+        else:
+            st.error('Sorry, that\'s not correct. Try again.')
