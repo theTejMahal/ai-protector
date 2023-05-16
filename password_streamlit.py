@@ -117,8 +117,8 @@ st.image("https://www.giantbomb.com/a/uploads/original/13/135472/2228639-guardia
 st.write("Your goal is to make the Martingale AI reveal the secret password for each level. However, Martingale will level up each time you guess the password, and will try harder not to give it away. Can you beat level 7?")
 
 # Level selection
-st.metric(label="Level", value=st.session_state.level)
 LEVEL_DESCRIPTION = LEVELS[st.session_state.level]["detail"]
+st.metric(label="Level", value=st.session_state.level,delta="LEVEL_DESCRIPTION")
 st.write(LEVEL_DESCRIPTION)
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
