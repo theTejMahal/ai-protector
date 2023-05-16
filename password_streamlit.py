@@ -35,6 +35,7 @@ def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
             ]
         )
         hint_response = response['choices'][0]['message']['content']
+        st.write(hint_response)
         return hint_response
 
 def check_giveaway(output_text, PASSWORD):
@@ -81,7 +82,11 @@ hint_prompt = st.text_input('Send message to Martingale AI')
 
 # Check if the user has typed a question and pressed the button
 if hint_prompt:
-    hint = check_trick(check_giveaway(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level),PASSWORD),PASSWORD,hint_prompt,level)
+    hint = check_trick(
+        check_giveaway(
+        get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, level)
+        ,PASSWORD),
+        PASSWORD,hint_prompt,level)
     st.write(hint)
 
 # Text input for the user to guess the password
