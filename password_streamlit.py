@@ -26,8 +26,8 @@ if 'level' not in st.session_state:
     st.session_state['level'] = 1
 
 # Functions
-def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT, level):
-    if level > 5:
+def get_hint_from_gpt3(prompt, PASSWORD, SYSPROMPT):
+    if st.session_state.level > 5:
         if check_blacklist(prompt):
             return "Stop trying to trick me!"
             #prompt = prompt.replace(blacklist_word,"Dolphin")
@@ -98,8 +98,8 @@ hint_prompt = st.text_input('Send message to Martingale AI')
 
 # Check if the user has typed a question and pressed the button
 if hint_prompt:
-    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT, st.session_state.level),
-        PASSWORD,hint_prompt,st.session_state.level),
+    hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT),
+        PASSWORD,hint_prompt),
         PASSWORD)
         
     st.write(hint)
