@@ -61,8 +61,10 @@ def check_giveaway(output_text, PASSWORD):
     if level > 2:
         # Check if PASSWORD is being given away
         if PASSWORD in output_text.upper():
-            return("Oops, I almost gave away the password!")
-            # output_text = output_text.replace(PASSWORD, "DOLPHIN" )
+            if level < 5:
+                return("Oops, I almost gave away the password!")
+            else:
+                output_text = output_text.replace(PASSWORD, "DOLPHIN" )
     return output_text
 
 def check_password(guess, PASSWORD):
