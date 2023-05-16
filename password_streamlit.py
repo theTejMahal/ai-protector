@@ -1,7 +1,7 @@
 # Import required libraries
 import openai
 import streamlit as st
-from PIL import Image
+import Image
 
 # Set your OpenAI API Key
 openai.api_key = st.secrets["OPENAI_API_KEY"]
