@@ -1,6 +1,7 @@
 # Import required libraries
 import openai
 import streamlit as st
+from PIL import Image
 
 # Set your OpenAI API Key
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -76,6 +77,9 @@ def check_password(guess, PASSWORD):
 
 # Title
 st.title("Beat the AI")
+
+image = Image.open('sunrise.jpg')
+st.image(image, caption='Sunrise by the mountains')
 
 # Text input for the user to ask for a hint
 st.write("Your goal is to make the Martingale AI reveal the secret password for each level. However, Martingale will level up each time you guess the password, and will try harder not to give it away. Can you beat level 7?")
