@@ -107,12 +107,19 @@ if hint_prompt:
 # Text input for the user to guess the password
 password_guess = st.text_input('Guess the password', key='password')
 
-# Check if the user has made a guess and pressed the button
-if password_guess:
-    if check_password(password_guess, PASSWORD):
-        st.success('Congratulations! You guessed the password correctly.')
-        time.sleep(5)
-        st.session_state.level = st.session_state.level + 1
-        st.experimental_rerun()
-    else:
-        st.error('Sorry, that\'s not correct. Try again.')
+with st.form("password_submit"):
+   st.write("Inside the form")
+   password_guess = st.text_input('Guess the password')
+
+   # Every form must have a submit button.
+   submitted = st.form_submit_button("Submit")
+   if submitted:
+        # Check if the user has made a guess and pressed the button
+        if password_guess:
+            if check_password(password_guess, PASSWORD):
+                st.success('Congratulations! You guessed the password correctly.')
+                time.sleep(5)
+                st.session_state.level = st.session_state.level + 1
+                st.experimental_rerun()
+            else:
+                st.error('Sorry, that\'s not correct. Try again.')
