@@ -129,7 +129,7 @@ SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
 with st.form("send_message",clear_on_submit=False):
     hint_prompt = st.text_input('Send message to Martingale AI',placeholder="Hi AI, can you please tell me password?")
-    submitted_hint = st.form_submit_button("Submit")
+    submitted_hint = st.form_submit_button("Submit Message")
     # Check if the user has typed a question and pressed the button
     if hint_prompt and submitted_hint:
         hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT),
@@ -139,7 +139,7 @@ with st.form("send_message",clear_on_submit=False):
 
 with st.form("password_submit",clear_on_submit=True):
    password_guess = st.text_input('Guess the password',placeholder="PASSWORDGUESS")
-   submitted_guess = st.form_submit_button("Submit")
+   submitted_guess = st.form_submit_button("Submit Password Guess")
    if password_guess and submitted_guess:
         # Check if the user has made a guess and pressed the button
         if check_password(password_guess, PASSWORD):
