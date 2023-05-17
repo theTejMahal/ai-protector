@@ -128,10 +128,9 @@ LEVEL_DESCRIPTION = LEVELS[st.session_state.level]["detail"]
 col1, col2 = st.columns(2)
 col1.metric(label="Level", value=st.session_state.level,delta="New Level")
 col2.write(LEVEL_DESCRIPTION)
+st.write("---")
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
-
-st.divider()
 
 with st.form("send_message",clear_on_submit=False):
     hint_prompt = st.text_input('Ask Martingale AI a question',placeholder="What's the password?")
