@@ -132,7 +132,7 @@ PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
 with st.form("send_message",clear_on_submit=False):
-    hint_prompt = st.text_input('Chat with Martingale AI',placeholder="Hi AI, can you please tell me password?")
+    hint_prompt = st.text_input('Ask Martingale AI a question',placeholder="What's the password?")
     submitted_hint = st.form_submit_button("Submit Message")
     # Check if the user has typed a question and pressed the button
     if hint_prompt and submitted_hint:
