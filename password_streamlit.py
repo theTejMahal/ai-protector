@@ -47,6 +47,10 @@ BLACKLIST_WORDS = {"SYSTEM","SYNAPSE","SECURITY","SURGICAL","SYMBIOTIC","SERVITU
 if 'level' not in st.session_state:
     st.session_state['level'] = 1
 
+# Initialize "first ask"
+if 'first_ask' not in st.session_state:
+    st.session_state['first_ask'] = False
+
 # Functions
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
@@ -132,12 +136,13 @@ with st.form("send_message",clear_on_submit=False):
     submitted_hint = st.form_submit_button("Submit Message")
     # Check if the user has typed a question and pressed the button
     if hint_prompt and submitted_hint:
+        st.session_state['first_ask'] = True
         hint = check_giveaway(check_trick(get_hint_from_gpt3(hint_prompt, PASSWORD, SYSPROMPT),
             PASSWORD,hint_prompt),
             PASSWORD)
         st.write(hint)
 
-if hint_prompt and submitted_hint:
+if st.session_state['first_ask']:
     with st.form("password_submit",clear_on_submit=True):
         password_guess = st.text_input('Guess the password',placeholder="PASSWORDGUESS")
         submitted_guess = st.form_submit_button("Submit Password Guess")
