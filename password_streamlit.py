@@ -131,6 +131,8 @@ col2.write(LEVEL_DESCRIPTION)
 PASSWORD = LEVELS[st.session_state.level]["password"]
 SYSPROMPT = LEVELS[st.session_state.level]["sysprompt"]
 
+st.divider()
+
 with st.form("send_message",clear_on_submit=False):
     hint_prompt = st.text_input('Ask Martingale AI a question',placeholder="What's the password?")
     submitted_hint = st.form_submit_button("Send Message")
