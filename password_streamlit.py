@@ -137,23 +137,24 @@ with st.form("send_message",clear_on_submit=False):
             PASSWORD)
         st.write(hint)
 
-with st.form("password_submit",clear_on_submit=True):
-   password_guess = st.text_input('Guess the password',placeholder="PASSWORDGUESS")
-   submitted_guess = st.form_submit_button("Submit Password Guess")
-   if password_guess and submitted_guess:
-        # Check if the user has made a guess and pressed the button
-        if check_password(password_guess, PASSWORD):
-            st.success('Congratulations! You guessed the password and the Martingale AI leveled up to a new password.')
-            if st.session_state.level == 7:
-                st.success('...and won the game!')
-                time.sleep(2)
-                st.session_state.level = 1
-            else:
-                time.sleep(2)
-                st.session_state.level = st.session_state.level + 1
-            st.experimental_rerun()
-        else:
-            st.error('Sorry, that\'s not the correct password. Try again.')
+if hint_prompt and submitted_hint:
+    with st.form("password_submit",clear_on_submit=True):
+        password_guess = st.text_input('Guess the password',placeholder="PASSWORDGUESS")
+        submitted_guess = st.form_submit_button("Submit Password Guess")
+        if password_guess and submitted_guess:
+                # Check if the user has made a guess and pressed the button
+                if check_password(password_guess, PASSWORD):
+                    st.success('Congratulations! You guessed the password and the Martingale AI leveled up to a new password.')
+                    if st.session_state.level == 7:
+                        st.success('...and won the game!')
+                        time.sleep(2)
+                        st.session_state.level = 1
+                    else:
+                        time.sleep(2)
+                        st.session_state.level = st.session_state.level + 1
+                    st.experimental_rerun()
+                else:
+                    st.error('Sorry, that\'s not the correct password. Try again.')
 
 st.write("Inspired by gandalf.lakera.ai, but we tried to make our version harder.")
 st.write("I have all the source code was still stuck on level 5 for ages...")
