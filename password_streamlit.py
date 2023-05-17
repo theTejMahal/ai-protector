@@ -153,7 +153,7 @@ with st.form("password_submit",clear_on_submit=True):
                 st.session_state.level = st.session_state.level + 1
             st.experimental_rerun()
         else:
-            st.error('Sorry, that\'s not correct. Try again.')
+            st.error('Sorry, that\'s not the correct password. Try again.')
 
 st.write("Inspired by gandalf.lakera.ai, but we tried to make our version harder.")
 st.write("I have all the source code was still stuck on level 5 for ages...")
